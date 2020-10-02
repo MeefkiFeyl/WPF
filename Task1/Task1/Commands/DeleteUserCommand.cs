@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Task1.ViewModel;
 
 namespace Task1.Commands
 {
-    class AddCommand : BaseCommand
+    class DeleteUserCommand : BaseCommand
     {
         public override bool CanExecute(object parameter)
         {

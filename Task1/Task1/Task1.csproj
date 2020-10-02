@@ -181,10 +181,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\AddCommand.cs" />
+    <Compile Include="Commands\AddCompanyCommand.cs" />
+    <Compile Include="Commands\AddUserCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="CAPContext.cs" />
-    <Compile Include="Commands\DeleteCommand.cs" />
+    <Compile Include="Commands\DeleteCompanyCommand.cs" />
+    <Compile Include="Commands\DeleteUserCommand.cs" />
     <Compile Include="Model\Companies.cs" />
     <Compile Include="Model\Users.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
