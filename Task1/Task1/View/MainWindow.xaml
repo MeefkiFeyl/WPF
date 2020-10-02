@@ -1,0 +1,33 @@
+﻿<Window x:Class="Task1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="494" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="companiesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Companies}, CreateList=True}"/>
+        <CollectionViewSource x:Key="companiesUsersViewSource" Source="{Binding Users, Source={StaticResource companiesViewSource}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource companiesViewSource}">
+        <DataGrid x:Name="companiesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,0,216,219" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="contractStatusColumn" Binding="{Binding ContractStatus}" Header="Contract Status" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="usersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource companiesUsersViewSource}}" Margin="0,205,216,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="companyIdColumn" Binding="{Binding CompanyId}" Header="Company Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="loginColumn" Binding="{Binding Login}" Header="Login" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn1" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="passwordColumn" Binding="{Binding Password}" Header="Password" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Save" Command="{Binding Save}" Margin="275,0,0,219"/>
+        <Button Content="Delete" Command="{Binding Delete}" Margin="275,205,0,10"/>
+    </Grid>
+</Window>
