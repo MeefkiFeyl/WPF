@@ -1,12 +1,8 @@
 ﻿using CAP.Command;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
-using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System;
 
 namespace CAP.ViewModels
 {
