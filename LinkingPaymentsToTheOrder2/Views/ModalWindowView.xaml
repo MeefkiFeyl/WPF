@@ -1,0 +1,132 @@
+﻿<Window x:Class="LinkingPaymentsToTheOrder2.Views.ModalWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:LinkingPaymentsToTheOrder2.Views"
+        xmlns:converters="clr-namespace:LinkingPaymentsToTheOrder2.Converters"
+        mc:Ignorable="d"
+        Title="Ошибка"
+        SizeToContent="WidthAndHeight"
+        MinHeight="150"
+        MaxHeight="800"
+        MinWidth="400"
+        ResizeMode="NoResize"
+        >
+    <Window.Resources>
+        <converters:BooleanToVisibilityConverter 
+            x:Key="BooleanToVisibilityConverter" 
+            True="Visible" 
+            False="Collapsed"/>
+        
+        <converters:BooleanToVisibilityConverter 
+            x:Key="BooleanToVisibilityConverterBack" 
+            True="Collapsed" 
+            False="Visible"/>
+    </Window.Resources>
+
+
+
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition 
+                MinHeight="70"/>
+            <RowDefinition 
+                Height="Auto"/>
+            <RowDefinition
+                Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            Margin="0,10,0,10"
+            TextWrapping="Wrap"
+            Text="{Binding TextMessage}"/>
+        
+        <Grid 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button 
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                MinWidth="75" 
+                Margin="0,5,5,5"  
+                IsEnabled="True"
+                Click="OnYes"
+                Visibility="{Binding IsYesNoMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Command="{Binding OnYes}"
+                Content="Да">
+                
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction MethodName="Close"
+                           TargetObject="{Binding RelativeSource={RelativeSource
+                                                  Mode=FindAncestor,
+                                                  AncestorType=Window}}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
+            </Button>
+
+            <Button
+                Grid.Column="3"
+                HorizontalAlignment="Center"
+                MinWidth="75" 
+                Margin="0,5,5,5" 
+                IsCancel="True"
+                Visibility="{Binding IsYesNoMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Content="Нет"/>
+
+            <Button
+                Grid.Column="2"
+                HorizontalAlignment="Center"
+                MinWidth="75" 
+                Margin="0,5,5,5" 
+                IsEnabled="True"
+                Click="OnYes"
+                Command="{Binding OnYes}"
+                Visibility="{Binding IsYesNoMode, Converter={StaticResource BooleanToVisibilityConverterBack}}"
+                Content="Ок">
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction MethodName="Close"
+                           TargetObject="{Binding RelativeSource={RelativeSource
+                                                  Mode=FindAncestor,
+                                                  AncestorType=Window}}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </Button>
+
+        </Grid>
+
+        <Expander
+            Grid.Row="2"
+            ExpandDirection="Down"
+            Width="400"
+            HorizontalAlignment="Left"
+            Visibility="{Binding IsVisibleExpander, Converter={StaticResource BooleanToVisibilityConverter}}">
+            
+            <TextBlock
+                    TextWrapping="Wrap"
+                    FontSize="11"
+                    Text="{Binding Err}"/>
+
+        </Expander>
+
+    </Grid>
+</Window>
